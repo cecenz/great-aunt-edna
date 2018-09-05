@@ -23,6 +23,13 @@ export default function() {
                     honeymoon would be much appreciated.
                 </p>
             </Section>
+            <Section textLength>
+                <h2>Contact</h2>
+                <p>
+                    If you have any questions, please don't hesitate to email us
+                    on claire.campbellnz@gmail.com
+                </p>
+            </Section>
         </React.Fragment>
     );
 }
