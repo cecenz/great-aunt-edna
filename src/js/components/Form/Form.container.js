@@ -1,7 +1,7 @@
 import { withFormik } from 'formik';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-// import * as Yup from 'yup';
+import * as Yup from 'yup';
 
 import FormContainer from './Form';
 
@@ -17,33 +17,34 @@ export default withFormik({
         songRequest: data.songRequest,
     }),
 
-    // validationSchema: Yup.object().shape({
-    //     rsvp: Yup.string()
-    //         .nullable()
-    //         .required('Required'),
-    //     weddingMulti: Yup.array().when('rsvp', {
-    //         is: 'true',
-    //         then: Yup.array()
-    //             .oneOf([true])
-    //             .required(),
-    //     }),
-    //     diet: Yup.string()
-    //         .nullable()
-    //         .required('Required'),
-    //     dietMulti: Yup.string().required(
-    //         'Please select each person with a dietery requirment',
-    //     ),
-    //     dietRequirement: Yup.string().when('diet', {
-    //         is: 'true',
-    //         then: Yup.string().required('Please enter a diet requirement'),
-    //     }),
-    //     email: Yup.string()
-    //         .email('Invalid email address')
-    //         .required('Required'),
-    //     phone: Yup.string()
-    //         .phone('Invalid phone number')
-    //         .required('Required'),
-    // }),
+    validationSchema: Yup.object().shape({
+        rsvp: Yup.string()
+            .nullable()
+            .required('Required'),
+        weddingMulti: Yup.array().when('rsvp', {
+            is: 'true',
+            then: Yup.array()
+                .compact()
+                .required('Please select the guests that are coming'),
+            otherwise: Yup.array().min(1),
+        }),
+        diet: Yup.string().when('rsvp', {
+            is: 'true',
+            then: Yup.string()
+                .nullable()
+                .required('Required'),
+        }),
+        dietMulti: Yup.string().required(
+            'Please select each person with a dietery requirment',
+        ),
+        dietRequirement: Yup.string().when('diet', {
+            is: 'true',
+            then: Yup.string().required('Please enter a diet requirement'),
+        }),
+        email: Yup.string()
+            .email('Invalid email address')
+            .required('Required'),
+    }),
 
     handleSubmit: (values, { props, setStatus }) => {
         const result = {
