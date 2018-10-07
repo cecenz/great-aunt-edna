@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import classNames from 'classnames';
 import { Form } from 'formik';
 import PropTypes from 'prop-types';
 
 import Section from '../Section/Section';
-import FormField from './FormField/FormField';
 import FormFieldText from './FormFieldText/FormFieldText';
 import Errors from './Errors/Errors';
 

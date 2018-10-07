@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import classNames from 'classnames';
 
 import FormField from '../../FormField/FormField';
-import FormFieldText from '../../FormFieldText/FormFieldText';
 import Errors from '../../Errors/Errors';
 
 export default function({ members, errors, values, handleChange, touched }) {

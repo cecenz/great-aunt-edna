@@ -9,10 +9,18 @@ export default function({ data, name }) {
         }
         return members;
     }, []);
+
+    const dietRequirements = data.members.reduce((members, item) => {
+        if (item.diet) {
+            members.push(item.dietRequirements);
+        }
+        return members;
+    }, []);
     console.log(data);
+    console.log(weddingGuests);
     return (
         <Section textLength superTop>
-            <h3>{`Hi ${data.displayName}, your rsvp has been sucessful. `}</h3>
+            <h3>Your rsvp has been sucessful.</h3>
 
             <p>Here is the information you provided:</p>
             <CallToActionBlock>
@@ -23,41 +31,51 @@ export default function({ data, name }) {
                         <p>You are unable to attending our wedding</p>
                     )
                 ) : weddingGuests.length > 1 ? (
-                    <div>
-                        {weddingGuests.map(item => <p>{item.guestName}</p>)}
-                        <p>Will be attending the wedding. Wohoo!</p>
+                    <div className="cta__section">
+                        <h4 className="cta__heading">Attending</h4>
+                        <ul>
+                            {weddingGuests.map(item => (
+                                <li>{item.guestName}</li>
+                            ))}
+                        </ul>
                     </div>
                 ) : (
                     <p>No one is able to attend the wedding</p>
                 )}
-                {data.members.diet && <p>diet is true</p>}
-                {/* {data.members.length <= 1 ? (
-                    weddingGuests.length === 1 ? (
-                        <p>You will be attending our wedding. Wohoo!</p>
-                    ) : (
-                        <p>You are unable to attending our wedding</p>
-                    )
-                ) : weddingGuests.length > 1 ? (
-                    <div>
-                        {weddingGuests.map(item => <p>{item.guestName}</p>)}
-                        <p>Will be attending the wedding. Wohoo!</p>
-                    </div>
-                ) : (
-                    <p>No one is able to attend the wedding</p>
-                )} */}
-                <p>
-                    <strong>
-                        Email: <br />
-                    </strong>
-                    {data.contactDetails.email}
-                </p>
+
+                {data.members.length <= 1
+                    ? dietRequirements.length === 1 && (
+                          <p>
+                              You have the following diet requirement:{' '}
+                              <strong>{data.members.dietRequirement}</strong>
+                          </p>
+                      )
+                    : dietRequirements.length > 1 && (
+                          <div className="cta__section">
+                              <p>
+                                  We have the following people down with diet
+                                  requirments:
+                              </p>
+                              <ul>
+                                  {dietRequirements.map(item => (
+                                      <li>
+                                          {item.guestName}:{' '}
+                                          {item.dietRequirement}
+                                      </li>
+                                  ))}
+                              </ul>
+                          </div>
+                      )}
+
+                <div className="cta__section">
+                    <h4 className="cta__heading">Email</h4>
+                    <span>{data.contactDetails.email}</span>
+                </div>
                 {data.contactDetails.phone && (
-                    <p>
-                        <strong>
-                            Phone: <br />
-                        </strong>
-                        {data.contactDetails.phone}
-                    </p>
+                    <div>
+                        <h4 className="cta__heading">Phone</h4>
+                        <p>{data.contactDetails.phone}</p>
+                    </div>
                 )}
             </CallToActionBlock>
 
