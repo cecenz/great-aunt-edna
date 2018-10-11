@@ -28,9 +28,13 @@ class Content extends Component {
     componentDidMount() {
         const { name } = this.props.match.params;
         if (name) {
-            axios.get(`${GUEST_LIST}${name}.json`).then(response => {
-                this.setState({ data: response.data });
-            });
+            axios
+                .get(
+                    `https://great-aunt-edna-2.firebaseio.com/guests/${name}.json`,
+                )
+                .then(response => {
+                    this.setState({ data: response.data });
+                });
         }
         setTimeout(() => {
             this.setState({ loaded: true });
