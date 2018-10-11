@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import FormField from '../../FormField/FormField';
+import FormFieldText from '../../FormFieldText/FormFieldText';
 import Errors from '../../Errors/Errors';
+import DietMulti from '../DietMulti/DietMulti';
 
 export default function({ members, errors, values, handleChange, touched }) {
     return (
@@ -29,8 +31,43 @@ export default function({ members, errors, values, handleChange, touched }) {
                     defaultChecked={values.diet === 'false'}
                     onChange={handleChange}
                 />
+                {members &&
+                    members.length <= 1 &&
+                    values.diet === 'true' && (
+                        <Fragment>
+                            <FormFieldText
+                                labelcontent="Diet requirement"
+                                type="text"
+                                id="dietRequirement.0"
+                                onChange={handleChange}
+                                value={values.dietRequirement[0]}
+                                name="dietRequirement.0"
+                            />
+                            {errors.dietRequirement &&
+                                touched.dietRequirement && (
+                                    <Errors
+                                        errors={errors.dietRequirement}
+                                        touched={touched.dietRequirement}
+                                    />
+                                )}
+                        </Fragment>
+                    )}
+                {members &&
+                    members.length > 1 &&
+                    values.diet === 'true' && (
+                        <DietMulti
+                            members={members}
+                            values={values}
+                            handleChange={handleChange}
+                            errors={errors.dietMulti}
+                            touched={touched.dietMulti}
+                        />
+                    )}
             </div>
-            {errors && touched && <Errors errors={errors} touched={touched} />}
+            {errors.diet &&
+                touched.diet && (
+                    <Errors errors={errors.diet} touched={touched.diet} />
+                )}
         </div>
     );
 }

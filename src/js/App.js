@@ -10,8 +10,8 @@ export default function() {
     return (
         <div className="app">
             <Route exact path="/" component={Landing} />
-            <Route path="/foobar" component={Dashboard} />
-            <Route path="/guests/:name?" component={Content} />
+            <Route path="/brooksidelucky11" component={Dashboard} />
+            <Route path="/:name?" component={Content} />
         </div>
     );
 }

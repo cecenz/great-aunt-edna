@@ -9,7 +9,6 @@ import Errors from './Errors/Errors';
 import Rsvp from './Questions/Rsvp/Rsvp';
 import RsvpMulti from './Questions/RsvpMulti/RsvpMulti';
 import Diet from './Questions/Diet/Diet';
-import DietMulti from './Questions/DietMulti/DietMulti';
 
 import './form.css';
 
@@ -77,46 +76,11 @@ class FormContainer extends Component {
                                         members={members}
                                         values={values}
                                         handleChange={handleChange}
-                                        errors={errors.diet}
-                                        touched={touched.diet}
+                                        errors={errors}
+                                        touched={touched}
                                     />
                                 )}
-                            {members &&
-                                members.length <= 1 &&
-                                values.diet === 'true' && (
-                                    <Fragment>
-                                        <FormFieldText
-                                            labelcontent="Diet requirement"
-                                            type="text"
-                                            id="dietRequirement.0"
-                                            onChange={handleChange}
-                                            value={values.dietRequirement[0]}
-                                            name="dietRequirement.0"
-                                        />
-                                        {errors.dietRequirement &&
-                                            touched.dietRequirement && (
-                                                <Errors
-                                                    errors={
-                                                        errors.dietRequirement
-                                                    }
-                                                    touched={
-                                                        touched.dietRequirement
-                                                    }
-                                                />
-                                            )}
-                                    </Fragment>
-                                )}
-                            {members &&
-                                multi &&
-                                values.diet === 'true' && (
-                                    <DietMulti
-                                        members={members}
-                                        values={values}
-                                        handleChange={handleChange}
-                                        errors={errors.dietMulti}
-                                        touched={touched.dietMulti}
-                                    />
-                                )}
+
                             {values.rsvp === 'true' &&
                                 members &&
                                 multi && (
