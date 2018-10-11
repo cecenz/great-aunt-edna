@@ -10,7 +10,6 @@ export default withFormik({
         rsvp: undefined,
         weddingMulti: data.members.map(item => item.rsvp),
         diet: undefined,
-        dietMulti: data.members.map(item => item.diet),
         dietRequirement: data.members.map(item => item.dietRequirement),
         email: data.contactDetails.email,
         phone: data.contactDetails.phone,
@@ -34,9 +33,6 @@ export default withFormik({
                 .nullable()
                 .required('Required'),
         }),
-        dietMulti: Yup.string().required(
-            'Please select each person with a dietery requirment',
-        ),
         dietRequirement: Yup.string().when('diet', {
             is: 'true',
             then: Yup.string().required('Please enter a diet requirement'),
@@ -54,7 +50,6 @@ export default withFormik({
                 ...props.data.members.map((item, index) => ({
                     ...item,
                     rsvp: values.weddingMulti[index],
-                    diet: values.dietMulti[index],
                     dietRequirement: values.dietRequirement[index],
                 })),
             ],
@@ -62,12 +57,12 @@ export default withFormik({
                 email: values.email,
                 phone: values.phone,
             },
+            songRequest: values.songRequest,
         };
         if (props.data.members.length <= 1) {
             result.members = props.data.members.map((item, index) => ({
                 ...item,
                 rsvp: values.rsvp === 'false' ? false : values.rsvp,
-                diet: values.rsvp === 'false' ? false : values.rsvp,
                 dietRequirement: values.dietRequirement[index],
             }));
         }

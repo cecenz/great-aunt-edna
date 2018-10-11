@@ -40,8 +40,6 @@ class FormContainer extends Component {
         } else {
             multi = false;
         }
-        console.log(values);
-        console.log('errors', errors);
 
         return (
             <Section textLength superTop>
@@ -49,10 +47,10 @@ class FormContainer extends Component {
                     <div>
                         <h2>{`Hi ${data.displayName}`}</h2>
                         <p>
-                            We hope that you will be able to celebrate this
-                            wonderful day with us. Please fill in the form below
-                            to let us know whether or not you will be able to
-                            attend.
+                            We hope that you'll be able to join in celebrating
+                            our special day with us. Please fill in the form
+                            below to let us know whether or not you will be able
+                            to attend.
                         </p>
                         <h3>RSVP</h3>
                         <Form>
@@ -62,7 +60,6 @@ class FormContainer extends Component {
                                 errors={errors.rsvp}
                                 touched={touched.rsvp}
                             />
-
                             {values.rsvp === 'true' && members && multi ? (
                                 <RsvpMulti
                                     members={members}
@@ -125,8 +122,11 @@ class FormContainer extends Component {
                                 multi && (
                                     <div className="form__group">
                                         <div tabIndex="-1">
+                                            <h4>
+                                                What song would be great for the
+                                                dancefloor?
+                                            </h4>
                                             <FormFieldText
-                                                labelcontent="What song would be great for the dancefloor?"
                                                 type="text"
                                                 id="songRequest"
                                                 onChange={handleChange}
@@ -148,48 +148,50 @@ class FormContainer extends Component {
                                         </div>
                                     </div>
                                 )}
-                            <div className="form__group">
-                                <h4 className="form__header">
-                                    Please provide contact details if we need to
-                                    get in touch.
-                                </h4>
-                                <div>
-                                    <FormFieldText
-                                        labelcontent="Email"
-                                        type="email"
-                                        id="email"
-                                        onChange={handleChange}
-                                        value={values.email}
-                                        name="email"
-                                        errors={errors.email}
-                                    />
-                                    {errors.email &&
-                                        touched.email && (
-                                            <Errors
-                                                errors={errors.email}
-                                                touched={touched.email}
-                                            />
-                                        )}
+                            {values.rsvp && (
+                                <div className="form__group">
+                                    <h4 className="form__header">
+                                        Please provide contact details if we
+                                        need to get in touch.
+                                    </h4>
+                                    <div className="form__group form__group--s">
+                                        <FormFieldText
+                                            labelcontent="Email"
+                                            type="email"
+                                            id="email"
+                                            onChange={handleChange}
+                                            value={values.email}
+                                            name="email"
+                                            errors={errors.email}
+                                        />
+                                        {errors.email &&
+                                            touched.email && (
+                                                <Errors
+                                                    errors={errors.email}
+                                                    touched={touched.email}
+                                                />
+                                            )}
+                                    </div>
+                                    <div>
+                                        <FormFieldText
+                                            labelcontent="Phone"
+                                            type="phone"
+                                            id="phone"
+                                            onChange={handleChange}
+                                            value={values.phone}
+                                            name="phone"
+                                            errors={errors.phone}
+                                        />
+                                        {errors.phone &&
+                                            touched.phone && (
+                                                <Errors
+                                                    errors={errors.phone}
+                                                    touched={touched.phone}
+                                                />
+                                            )}
+                                    </div>
                                 </div>
-                                <div>
-                                    <FormFieldText
-                                        labelcontent="Phone"
-                                        type="phone"
-                                        id="phone"
-                                        onChange={handleChange}
-                                        value={values.phone}
-                                        name="phone"
-                                        errors={errors.phone}
-                                    />
-                                    {errors.phone &&
-                                        touched.phone && (
-                                            <Errors
-                                                errors={errors.phone}
-                                                touched={touched.phone}
-                                            />
-                                        )}
-                                </div>
-                            </div>
+                            )}
                             <p>
                                 If you need to make any changes once you have
                                 submitted, please get in touch.
@@ -211,7 +213,6 @@ FormContainer.propTpes = {
     rsvp: PropTypes.string,
     weddingMulti: PropTypes.array.isRequired,
     diet: PropTypes.string,
-    dietMulti: PropTypes.isRequired,
     dietRequirement: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,

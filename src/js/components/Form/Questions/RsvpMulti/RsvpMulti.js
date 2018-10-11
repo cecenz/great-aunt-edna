@@ -17,6 +17,10 @@ export default function({ members, errors, values, handleChange, touched }) {
                     const value = item.guestName
                         .replace(' ', '-')
                         .toLowerCase();
+                    console.log(
+                        'values.weddingMulti[index]',
+                        values.weddingMulti[index],
+                    );
                     return (
                         <FormField
                             id={`weddingMulti.${value}`}

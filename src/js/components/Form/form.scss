@@ -4,6 +4,13 @@
 .form__group {
     margin-bottom: $spacing-l;
 }
+.form__group--s {
+    margin-bottom: $spacing;
+}
+
+.form__items {
+    margin-bottom: $spacing-s;
+}
 
 .form__item {
     display: inline-block;
@@ -34,7 +41,6 @@
 
 .form__input--text,
 .form__input--email {
-    margin-bottom: 0.5rem;
     padding-bottom: 0.5rem;
     .form__input {
         display: block;
