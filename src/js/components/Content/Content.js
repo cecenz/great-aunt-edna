@@ -3,7 +3,7 @@ import axios from 'axios';
 import classNames from 'classnames';
 import { Route } from 'react-router-dom';
 
-import GUEST_LIST from '../../utils/var';
+// import GUEST_LIST from '../../utils/var';
 import Form from '../Form/Form.container';
 import Details from './Details/Details';
 import Schedule from './Schedule/Schedule';
@@ -27,6 +27,7 @@ class Content extends Component {
 
     componentDidMount() {
         const { name } = this.props.match.params;
+        console.log(name);
         if (name) {
             axios
                 .get(
@@ -54,33 +55,39 @@ class Content extends Component {
 
     render() {
         const url = this.props.match.url;
+        console.log(this.props);
         const name = this.props.match.params.name;
         const guestData = this.state.data;
-
+        console.log('this.state', this.state);
         return (
             <React.Fragment>
                 <Route exact path={`${url}`} component={Landing} />
-                <Header url={url} loaded={this.resetLoadHandler} />
+                <Header
+                    url={url}
+                    loaded={this.resetLoadHandler}
+                    guests={guestData}
+                />
                 <div
                     className={classNames('content', {
                         'content--loaded': this.state.loaded,
                         'content--pre-loaded': !this.state.loaded,
                     })}
                 >
-                    <Route path={`${url}/schedule`} component={Schedule} />
-                    <Route path={`${url}/location`} component={Location} />
-                    <Route path={`${url}/details`} component={Details} />
-                    {guestData &&
+                    <Route path="/schedule" component={Schedule} />
+                    <Route path="/location" component={Location} />
+                    <Route path="/details" component={Details} />
+
+                    {guestData !== null &&
                         (guestData.submitted ? (
                             <Route
-                                path={`${url}/rsvp`}
+                                path="/rsvp"
                                 render={() => (
                                     <Summary data={guestData} name={name} />
                                 )}
                             />
                         ) : (
                             <Route
-                                path={`${url}/rsvp`}
+                                path="/rsvp"
                                 render={() => (
                                     <Form
                                         data={guestData}

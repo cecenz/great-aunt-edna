@@ -10,6 +10,16 @@ import Rsvp from './Questions/Rsvp/Rsvp';
 import RsvpMulti from './Questions/RsvpMulti/RsvpMulti';
 import Diet from './Questions/Diet/Diet';
 
+// User clicks on RSVP button - goes to URL/rsvp
+// User is presented with a textfield box and submit button
+// once sumit button is clicked:
+// check validation of unique code, against all codes in db
+// if it returns true:
+// set local status to validated
+// add unique code to the end of the url
+// present form or summary
+// else return with a nice error message
+
 import './form.css';
 
 class FormContainer extends Component {
@@ -42,6 +52,7 @@ class FormContainer extends Component {
 
         return (
             <Section textLength superTop>
+                <input type="text" />
                 {this.state.show && (
                     <div>
                         <h2>{`Hi ${data.displayName}`}</h2>
