@@ -5,22 +5,24 @@ import Image from '../Image/Image';
 
 import './header.css';
 
-export default function({ url, loaded }) {
+export default function({ loaded, isShowLogo }) {
     return (
         <Section noTop noBottom>
             <div className="header">
-                <NavLink exact to={`${url}`} activeClassName="u-hide">
-                    <Image
-                        className="image header__logo"
-                        src="/assets/images/logo.png"
-                        alt="Claire and Matt text"
-                    />
-                </NavLink>
+                {isShowLogo && (
+                    <NavLink exact to="/">
+                        <Image
+                            className="image header__logo"
+                            src="/assets/images/logo.png"
+                            alt="Claire and Matt text"
+                        />
+                    </NavLink>
+                )}
                 <ul className="navigation">
                     <li className="navigation__item">
                         <NavLink
                             onClick={loaded}
-                            to={`${url}/schedule`}
+                            to="/schedule"
                             className="navigation__link"
                             activeClassName="navigation__link--active"
                             href="#"
@@ -31,7 +33,7 @@ export default function({ url, loaded }) {
                     <li className="navigation__item">
                         <NavLink
                             onClick={loaded}
-                            to={`${url}/location`}
+                            to="/location"
                             className="navigation__link"
                             activeClassName="navigation__link--active"
                             href="#"
@@ -42,7 +44,7 @@ export default function({ url, loaded }) {
                     <li className="navigation__item">
                         <NavLink
                             onClick={loaded}
-                            to={`${url}/details`}
+                            to="/details"
                             className="navigation__link"
                             activeClassName="navigation__link--active"
                             href="#"
@@ -53,7 +55,7 @@ export default function({ url, loaded }) {
                     <li className="navigation__item navigation__item--button">
                         <NavLink
                             onClick={loaded}
-                            to={`${url}/rsvp`}
+                            to="/rsvp"
                             className="navigation__link"
                             activeClassName="navigation__link--active-button"
                             href="#"

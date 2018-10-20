@@ -3,12 +3,13 @@ import axios from 'axios';
 import classNames from 'classnames';
 import { Route } from 'react-router-dom';
 
-import GUEST_LIST from '../../utils/var';
+// import GUEST_LIST from '../../utils/var';
 import Form from '../Form/Form.container';
 import Details from './Details/Details';
 import Schedule from './Schedule/Schedule';
 import Location from './Location/Location';
-import Landing from './Landing/Landing';
+// import Landing from './Landing/Landing';
+import Rsvp from './Rsvp/Rsvp';
 import Summary from '../Summary/Summary';
 import Header from '../Header/Header';
 
@@ -26,6 +27,7 @@ class Content extends Component {
     }
 
     componentDidMount() {
+        // console.log('component mounted');
         const { name } = this.props.match.params;
         if (name) {
             axios
@@ -57,30 +59,37 @@ class Content extends Component {
         const name = this.props.match.params.name;
         const guestData = this.state.data;
 
+        // console.log('guestData', this.state.data);
+        // console.log('this.props.match.params', this.props.match.params);
+
         return (
             <React.Fragment>
-                <Route exact path={`${url}`} component={Landing} />
-                <Header url={url} loaded={this.resetLoadHandler} />
+                <Header
+                    url={url}
+                    loaded={this.resetLoadHandler}
+                    isShowLogo={true}
+                />
                 <div
                     className={classNames('content', {
                         'content--loaded': this.state.loaded,
                         'content--pre-loaded': !this.state.loaded,
                     })}
                 >
-                    <Route path={`${url}/schedule`} component={Schedule} />
-                    <Route path={`${url}/location`} component={Location} />
-                    <Route path={`${url}/details`} component={Details} />
-                    {guestData &&
-                        (guestData.submitted ? (
+                    <Route path="/schedule" component={Schedule} />
+                    <Route path="/location" component={Location} />
+                    <Route path="/details" component={Details} />
+
+                    {guestData ? (
+                        guestData.submitted ? (
                             <Route
-                                path={`${url}/rsvp`}
+                                path="/rsvp/:name/summary"
                                 render={() => (
                                     <Summary data={guestData} name={name} />
                                 )}
                             />
                         ) : (
                             <Route
-                                path={`${url}/rsvp`}
+                                path="/rsvp/:name/form"
                                 render={() => (
                                     <Form
                                         data={guestData}
@@ -89,7 +98,10 @@ class Content extends Component {
                                     />
                                 )}
                             />
-                        ))}
+                        )
+                    ) : (
+                        <Route path="/rsvp" component={Rsvp} data={guestData} />
+                    )}
                 </div>
             </React.Fragment>
         );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Image from '../../Image/Image';
 import classNames from 'classnames';
 import './landing.css';
+import Header from '../../Header/Header';
 
 class Landing extends Component {
     constructor(props) {
@@ -45,6 +46,7 @@ class Landing extends Component {
                         </span>
                     </h3>
                 </div>
+                <Header isShowLogo={false} />
             </div>
         );
     }

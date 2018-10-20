@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Form } from 'formik';
 import PropTypes from 'prop-types';
 
@@ -39,7 +39,6 @@ class FormContainer extends Component {
         } else {
             multi = false;
         }
-
         return (
             <Section textLength superTop>
                 {this.state.show && (
