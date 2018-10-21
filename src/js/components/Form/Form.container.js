@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
 import FormContainer from './Form';
+import { history } from '../../utils/var';
 
 export default withFormik({
     mapPropsToValues: ({ data }) => ({
@@ -43,6 +44,7 @@ export default withFormik({
     }),
 
     handleSubmit: (values, { props, setStatus }) => {
+        console.log(props);
         const result = {
             submitted: true,
             displayName: props.data.displayName,
@@ -74,8 +76,9 @@ export default withFormik({
                 result,
             )
             .then(() => {
-                props.submitSuccess(result);
                 setStatus('success');
+                history.replace(`/rsvp/${props.name}/summary`);
+                props.submitSuccess(result);
             });
     },
 })(FormContainer);

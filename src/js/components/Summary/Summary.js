@@ -17,7 +17,6 @@ export default function({ data, name }) {
         return members;
     }, []);
 
-    console.log('dietRequirements', dietRequirements);
     return (
         <Section textLength superTop>
             <h3>Your rsvp has been sucessful.</h3>

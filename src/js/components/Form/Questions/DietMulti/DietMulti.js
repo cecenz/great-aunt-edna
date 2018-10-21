@@ -5,7 +5,6 @@ import FormFieldText from '../../FormFieldText/FormFieldText';
 import Errors from '../../Errors/Errors';
 
 export default function({ members, errors, values, handleChange, touched }) {
-    console.log(values);
     return (
         <Fragment>
             <h4 className="form__header">Who has dietry requirements</h4>

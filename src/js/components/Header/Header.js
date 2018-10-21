@@ -6,6 +6,9 @@ import Image from '../Image/Image';
 import './header.css';
 
 export default function({ loaded, isShowLogo }) {
+    const activeClassName = 'navigation__link--active';
+    const linkClassName = 'navigation__link';
+    const navClassName = 'navigation__item';
     return (
         <Section noTop noBottom>
             <div className="header">
@@ -19,45 +22,45 @@ export default function({ loaded, isShowLogo }) {
                     </NavLink>
                 )}
                 <ul className="navigation">
-                    <li className="navigation__item">
+                    <li className={navClassName}>
                         <NavLink
                             onClick={loaded}
                             to="/schedule"
-                            className="navigation__link"
-                            activeClassName="navigation__link--active"
+                            className={linkClassName}
+                            activeClassName={activeClassName}
                             href="#"
                         >
                             The wedding
                         </NavLink>
                     </li>
-                    <li className="navigation__item">
+                    <li className={navClassName}>
                         <NavLink
                             onClick={loaded}
                             to="/location"
-                            className="navigation__link"
-                            activeClassName="navigation__link--active"
+                            className={linkClassName}
+                            activeClassName={activeClassName}
                             href="#"
                         >
                             Getting there
                         </NavLink>
                     </li>
-                    <li className="navigation__item">
+                    <li className={navClassName}>
                         <NavLink
                             onClick={loaded}
                             to="/details"
-                            className="navigation__link"
-                            activeClassName="navigation__link--active"
+                            className={linkClassName}
+                            activeClassName={activeClassName}
                             href="#"
                         >
                             Other Info
                         </NavLink>
                     </li>
-                    <li className="navigation__item navigation__item--button">
+                    <li className={`${navClassName} ${navClassName}--button`}>
                         <NavLink
                             onClick={loaded}
                             to="/rsvp"
-                            className="navigation__link"
-                            activeClassName="navigation__link--active-button"
+                            className={linkClassName}
+                            activeClassName={`${activeClassName}-button`}
                             href="#"
                         >
                             RSVP

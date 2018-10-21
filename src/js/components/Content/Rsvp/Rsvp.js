@@ -5,6 +5,7 @@ import axios from 'axios';
 import Form from '../../Form/Form.container';
 
 import Section from '../../Section/Section';
+import Summary from '../../Summary/Summary';
 
 class Rsvp extends Component {
     constructor(props) {
@@ -13,11 +14,12 @@ class Rsvp extends Component {
             rsvpValue: '',
             guest: {
                 valid: false,
-                data: undefined,
+                data: {},
                 id: undefined,
             },
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.submitSuccess = this.submitSuccess.bind(this);
     }
 
     handleSubmit(e, value) {
@@ -29,35 +31,59 @@ class Rsvp extends Component {
                 )
                 .then(response => {
                     if (response.data) {
-                        return this.setState({
+                        return this.setState(prevState => ({
                             guest: {
+                                ...prevState.guest,
                                 valid: true,
                                 data: response.data,
                                 id: value,
                             },
-                        });
+                        }));
                     } else {
-                        console.log('failed');
+                        console.log('failed TODO');
                     }
                 });
         }
     }
+    submitSuccess(data) {
+        this.setState(prevState => ({
+            guest: {
+                ...prevState.guest,
+                data,
+            },
+        }));
+    }
+
     render() {
-        console.log(this.props);
-        if (this.state.guest.valid) {
+        const guest = this.state.guest;
+        const guestId = this.state.guest.id;
+        const guestData = this.state.guest.data;
+        if (guestData.submitted) {
             return (
                 <Switch>
                     <Redirect
                         exact
                         from="/rsvp"
-                        to={`/rsvp/${this.state.guest.id}/form`}
+                        to={`/rsvp/${guestId}/summary`}
                     />
                     <Route
-                        path={`/rsvp/${this.state.guest.id}/form`}
+                        path={`/rsvp/${guestId}/summary`}
+                        render={() => (
+                            <Summary data={guestData} name={guestId} />
+                        )}
+                    />
+                </Switch>
+            );
+        } else if (guest.valid) {
+            return (
+                <Switch>
+                    <Redirect exact from="/rsvp" to={`/rsvp/${guestId}/form`} />
+                    <Route
+                        path={`/rsvp/${guestId}/form`}
                         render={() => (
                             <Form
-                                data={this.state.guest.data}
-                                name={this.state.guest.data.displayName}
+                                data={guestData}
+                                name={guestId}
                                 submitSuccess={this.submitSuccess}
                             />
                         )}
