@@ -12,7 +12,6 @@ export default function() {
             <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route path="/brooksidelucky11" component={Dashboard} />
-                {/* <Route exact path="/rsvp/:name/form" component={Content} /> */}
                 <Route component={Content} />
             </Switch>
         </div>

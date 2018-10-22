@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Redirect, Switch, Route } from 'react-router';
 import axios from 'axios';
 
-import Form from '../../Form/Form.container';
+import Form from '../Form.container';
 
 import Section from '../../Section/Section';
 import Summary from '../../Summary/Summary';
+
+import '../form.css';
 
 class Rsvp extends Component {
     constructor(props) {
@@ -17,6 +19,7 @@ class Rsvp extends Component {
                 data: {},
                 id: undefined,
             },
+            rsvpIdError: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.submitSuccess = this.submitSuccess.bind(this);
@@ -25,9 +28,10 @@ class Rsvp extends Component {
     handleSubmit(e, value) {
         e.preventDefault();
         if (value) {
+            const formattedValue = value.toLowerCase();
             axios
                 .get(
-                    `https://great-aunt-edna-2.firebaseio.com/guests/${value}.json`,
+                    `https://great-aunt-edna-2.firebaseio.com/guests/${formattedValue}.json`,
                 )
                 .then(response => {
                     if (response.data) {
@@ -36,11 +40,11 @@ class Rsvp extends Component {
                                 ...prevState.guest,
                                 valid: true,
                                 data: response.data,
-                                id: value,
+                                id: formattedValue,
                             },
                         }));
                     } else {
-                        console.log('failed TODO');
+                        return this.setState({ rsvpIdError: true });
                     }
                 });
         }
@@ -97,19 +101,31 @@ class Rsvp extends Component {
                         <h2>RSVP</h2>
                         <p>
                             Please enter your unique code to RSVP or view your
-                            RSVP deatils
+                            submitted details
                         </p>
                         <form action="GET">
-                            <input
-                                onChange={e =>
-                                    this.setState({
-                                        rsvpValue: e.target.value,
-                                    })
-                                }
-                                type="text"
-                                value={this.state.rsvpValue}
-                            />
+                            <div className="form__group--s">
+                                <div className="form__input--text">
+                                    <input
+                                        className="form__input"
+                                        onChange={e =>
+                                            this.setState({
+                                                rsvpValue: e.target.value,
+                                            })
+                                        }
+                                        type="text"
+                                        value={this.state.rsvpValue}
+                                    />
+                                </div>
+                                {this.state.rsvpIdError && (
+                                    <p className="form__error-message">
+                                        That code does not exist. Please check
+                                        your email and try again
+                                    </p>
+                                )}
+                            </div>
                             <button
+                                className="form__button"
                                 onClick={e =>
                                     this.handleSubmit(e, this.state.rsvpValue)
                                 }

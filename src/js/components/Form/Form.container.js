@@ -9,7 +9,7 @@ import { history } from '../../utils/var';
 export default withFormik({
     mapPropsToValues: ({ data }) => ({
         rsvp: undefined,
-        weddingMulti: data.members.map(item => item.rsvp),
+        weddingMulti: [],
         diet: undefined,
         dietRequirement: data.members.map(item => item.dietRequirement),
         email: data.contactDetails.email,
@@ -26,7 +26,7 @@ export default withFormik({
             then: Yup.array()
                 .compact()
                 .required('Please select the guests that are coming'),
-            otherwise: Yup.array().min(1),
+            // otherwise: Yup.array().min(1),
         }),
         diet: Yup.string().when('rsvp', {
             is: 'true',
@@ -44,7 +44,6 @@ export default withFormik({
     }),
 
     handleSubmit: (values, { props, setStatus }) => {
-        console.log(props);
         const result = {
             submitted: true,
             displayName: props.data.displayName,

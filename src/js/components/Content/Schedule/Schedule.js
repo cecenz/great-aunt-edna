@@ -10,8 +10,12 @@ export default function() {
             <Section textLength superTop>
                 <h2>Schedule</h2>
                 <p>
-                    We're still working on the finer details of the day. We will
-                    email everyone when this is available.
+                    We're still working on the finer details of the day. But not
+                    to worry, we'll email everyone when this is available.
+                </p>
+                <p>
+                    Don't forget to keep the Sunday free if you can, as we will
+                    be hosting something small the day after too.
                 </p>
             </Section>
             <Section textLength>

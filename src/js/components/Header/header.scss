@@ -12,10 +12,14 @@
 
 .header__logo {
     padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
     width: 150px;
     display: block;
     text-align: center;
     margin: 0 auto;
+    @include medium {
+        padding-top: 0;
+    }
 }
 
 .navigation {

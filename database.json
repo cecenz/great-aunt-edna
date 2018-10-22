@@ -462,7 +462,7 @@
                 }
             ]
         },
-        "klan2678": {
+        "khla2678": {
             "contactDetails": {
                 "email": "david_klahn@hotmail.com",
                 "phone": ""
@@ -983,6 +983,38 @@
                     "rsvp": false,
                     "dietRequirement": "",
                     "guestName": "Jeremy Brass"
+                }
+            ]
+        },
+        "jaco1285": {
+            "contactDetails": {
+                "email": "brenden@ninness.co.nz",
+                "phone": ""
+            },
+            "submitted": false,
+            "displayName": "Brenden",
+            "songRequest": "",
+            "members": [
+                {
+                    "rsvp": false,
+                    "dietRequirement": "",
+                    "guestName": "Brenden Jacobsen"
+                }
+            ]
+        },
+        "pill7410": {
+            "contactDetails": {
+                "email": "pillingjoy@gmail.com",
+                "phone": ""
+            },
+            "submitted": false,
+            "displayName": "Joy",
+            "songRequest": "",
+            "members": [
+                {
+                    "rsvp": false,
+                    "dietRequirement": "",
+                    "guestName": "Joy Pilling"
                 }
             ]
         }

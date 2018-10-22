@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import classNames from 'classnames';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-// import GUEST_LIST from '../../utils/var';
-import Form from '../Form/Form.container';
 import Details from './Details/Details';
 import Schedule from './Schedule/Schedule';
 import Location from './Location/Location';
-// import Landing from './Landing/Landing';
-import Rsvp from './Rsvp/Rsvp';
-import Summary from '../Summary/Summary';
+import Rsvp from '../Form/Rsvp/Rsvp';
 import Header from '../Header/Header';
+import NoMatch from '../NoMatch/NoMatch';
 
 import './content.css';
 
@@ -53,10 +49,13 @@ class Content extends Component {
                         'content--pre-loaded': !this.state.loaded,
                     })}
                 >
-                    <Route path="/schedule" component={Schedule} />
-                    <Route path="/location" component={Location} />
-                    <Route path="/details" component={Details} />
-                    <Route path="/rsvp" component={Rsvp} />
+                    <Switch>
+                        <Route path="/schedule" component={Schedule} />
+                        <Route path="/location" component={Location} />
+                        <Route path="/details" component={Details} />
+                        <Route path="/rsvp" component={Rsvp} />
+                        <Route component={NoMatch} />
+                    </Switch>
                 </div>
             </React.Fragment>
         );

@@ -33,12 +33,6 @@ class FormContainer extends Component {
     render() {
         const { values, handleChange, errors, touched, data } = this.props;
         const { members } = data;
-        let multi;
-        if (members.length > 1) {
-            multi = true;
-        } else {
-            multi = false;
-        }
         return (
             <Section textLength superTop>
                 {this.state.show && (
@@ -58,17 +52,22 @@ class FormContainer extends Component {
                                 errors={errors.rsvp}
                                 touched={touched.rsvp}
                             />
-                            {values.rsvp === 'true' && members && multi ? (
-                                <RsvpMulti
-                                    members={members}
-                                    values={values}
-                                    handleChange={handleChange}
-                                    errors={errors.weddingMulti}
-                                    touched={touched.weddingMulti}
-                                />
-                            ) : (
-                                (values.weddingMulti = [true])
-                            )}
+                            {values.rsvp === 'true'
+                                ? members &&
+                                  (members.length > 1 ? (
+                                      <RsvpMulti
+                                          members={members}
+                                          values={values}
+                                          handleChange={handleChange}
+                                          errors={errors.weddingMulti}
+                                          touched={touched.weddingMulti}
+                                      />
+                                  ) : (
+                                      (values.weddingMulti = [true])
+                                  ))
+                                : members.map((item, index) => {
+                                      values.weddingMulti[index] = false;
+                                  })}
                             {values.rsvp === 'true' &&
                                 members && (
                                     <Diet
@@ -81,8 +80,7 @@ class FormContainer extends Component {
                                 )}
 
                             {values.rsvp === 'true' &&
-                                members &&
-                                multi && (
+                                members && (
                                     <div className="form__group">
                                         <div tabIndex="-1">
                                             <h4>
