@@ -69,7 +69,7 @@ export default withFormik({
         }
         axios
             .patch(
-                `https://great-aunt-edna-2.firebaseio.com/guests/${
+                `https://claire-and-matt.firebaseio.com/guests/${
                     props.name
                 }.json`,
                 result,

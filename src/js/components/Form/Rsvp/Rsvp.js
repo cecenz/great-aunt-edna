@@ -31,7 +31,7 @@ class Rsvp extends Component {
             const formattedValue = value.toLowerCase();
             axios
                 .get(
-                    `https://great-aunt-edna-2.firebaseio.com/guests/${formattedValue}.json`,
+                    `https://claire-and-matt.firebaseio.com/guests/${formattedValue}.json`,
                 )
                 .then(response => {
                     if (response.data) {

@@ -3,8 +3,6 @@ import axios from 'axios';
 import Section from '../Section/Section';
 import Grid from '../Grid/Grid';
 
-// import './dashboard.css';
-
 class Dashboard extends Component {
     constructor(props) {
         super(props);
@@ -15,7 +13,7 @@ class Dashboard extends Component {
 
     componentDidMount() {
         axios
-            .get(`https://great-aunt-edna-2.firebaseio.com/guests.json`)
+            .get(`https://claire-and-matt.firebaseio.com/guests.json`)
             .then(response => {
                 this.setState({ data: response.data });
             });
